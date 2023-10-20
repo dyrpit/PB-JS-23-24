@@ -1,4 +1,4 @@
-let dna = require("./dna.json");
+let dna = require("../dna.json");
 
 let START_CODON = "atg";
 let END_CODON = "taa";
