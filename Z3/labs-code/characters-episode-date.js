@@ -18,5 +18,5 @@ function getCharactersFromEpisodesBefore(date) {
   return Array.from(new Set(result));
 }
 
-const targetDate = new Date(2020, 4, 30);
+const targetDate = new Date(2020, 3, 30);
 console.log(getCharactersFromEpisodesBefore(targetDate).slice(0, 10));

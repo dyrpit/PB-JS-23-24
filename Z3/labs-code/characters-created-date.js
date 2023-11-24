@@ -10,6 +10,6 @@ function getCharactersCreatedBefore(date) {
   return result;
 }
 
-const targetDate = new Date(2018, 4, 15);
+const targetDate = new Date(2018, 3, 15);
 
 console.log(getCharactersCreatedBefore(targetDate).slice(0, 10));
