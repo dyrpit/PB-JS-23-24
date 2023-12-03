@@ -9,13 +9,46 @@
 // Value can be type string or number.
 // reverseValue(): If number do (*(-1)), if string reverse it.  Closure pattern.
 
-const myObject = (() => {})(); // YOUR CODE HERE
+const myObject = (() => {
+  let value;
 
-// myObject.setValue(5);
-// myObject.showValue();
-// myObject.reverseValue();
-// myObject.showValue();
-// myObject.setValue('hello');
-// myObject.showValue();
-// myObject.reverseValue();
-// myObject.showValue();
+  function setValue(newValue) {
+    if (typeof newValue !== "number" && typeof newValue !== "string") {
+      throw new Error("Incorrect input for setValue");
+    }
+    value = newValue;
+  }
+
+  function showValue() {
+    if (!value) {
+      throw new Error("No value has been set yet");
+    }
+    console.log(value);
+  }
+
+  function reverseValue() {
+    if (!value) {
+      throw new Error("No value has been set yet");
+    }
+    if (typeof value === "number") {
+      value = -value;
+    }
+    if (typeof value === "string") {
+      value = value.split("").reverse().join("");
+    }
+  }
+  return {
+    setValue,
+    showValue,
+    reverseValue,
+  };
+})();
+
+myObject.setValue(5);
+myObject.showValue();
+myObject.reverseValue();
+myObject.showValue();
+myObject.setValue("hello");
+myObject.showValue();
+myObject.reverseValue();
+myObject.showValue();

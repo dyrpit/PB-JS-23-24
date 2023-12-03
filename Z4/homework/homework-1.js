@@ -4,7 +4,15 @@
 // and on reject “Now I don’t’.
 
 function getRandomPromise() {
-  return; // Your solution here
+  const isSuccess = Math.random() > 0.5;
+  const randomPromise = new Promise((resolve, reject) => {
+    if (isSuccess) {
+      resolve("Now I work");
+    } else {
+      reject("Now I don't");
+    }
+  });
+  return randomPromise; // Your solution here
 }
 
 getRandomPromise()
