@@ -18,3 +18,61 @@
 // Create Car status object with acceptable statuses (NEW, USED, REFUND)
 // Add method changeStatus that accepts new status as a parameter
 // Add static method to check if car is after return
+
+const CAR_STATUS = require("./const");
+let count = 0;
+
+function getId() {
+  count++;
+  return count;
+}
+
+class Car {
+  wheels = 4;
+  status = CAR_STATUS.NEW;
+
+  constructor(acceleration, maxSpeed, price, productionDate) {
+    // this.id = Date.now();
+    this.id = getId();
+    this.acceleration = acceleration;
+    this.maxSpeed = maxSpeed;
+    this.price = price;
+    this.productionDate = productionDate
+      ? new Date(productionDate)
+      : new Date();
+  }
+
+  getSpeed(time) {
+    const calculatedSpeed = this.acceleration * time;
+    return calculatedSpeed >= this.maxSpeed ? this.maxSpeed : calculatedSpeed;
+  }
+
+  changePrice(newPrice) {
+    if (typeof newPrice !== "number") {
+      throw new Error("Price should be a number!");
+    }
+    this.price = newPrice;
+  }
+
+  changeStatus(newStatus) {
+    const acceptableStatuses = Object.values(CAR_STATUS);
+    if (!acceptableStatuses.includes(newStatus)) {
+      throw new Error("Incorrect status");
+    }
+    this.status = newStatus;
+  }
+
+  static isCar(inputObj) {
+    return inputObj instanceof Car;
+  }
+
+  static isRefund(car) {
+    if (!Car.isCar(car)) {
+      throw new Error("Input should be a car!");
+    }
+
+    return car.status === CAR_STATUS.REFUND;
+  }
+}
+
+module.exports = Car;
