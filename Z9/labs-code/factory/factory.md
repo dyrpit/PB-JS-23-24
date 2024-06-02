@@ -13,7 +13,7 @@ Payment Factory should have method `createPayment`. This method should accept tw
 
 The method should return the instance of the payment method based on the type. If the type is not found, it should throw an error.
 
-Tasks:
+## Tasks:
 
 1. Create PaymentFactory class. Implement the `createPayment` method on the PaymentFactory class. This method should accept a type parameter that indicates the type of payment method to be created.
 2. Define three payment classes: CreditCard, PayPal and BankTransfer. Each payment class should have a constructor that accepts the necessary payment details (eg. card number, bank account, details).
