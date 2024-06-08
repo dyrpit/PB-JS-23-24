@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>
+      Font size:
+      <input value="" type="text" name="font-size" />
+    </label>
+    <label>
+      Color:
+      <input value="" type="text" name="color" />
+    </label>
+    <button id="create">Create button</button>
+    <script>
+      const fontSizeInput = document.querySelector('[name="font-size"]');
+      const colorInput = document.querySelector('[name="color"]');
+      const createButton = document.querySelector('#create');
+
+      function button(strings, ...args) {
+        const cssProps = strings
+          .filter((str) => str.includes(':'))
+          .map((str) => str.replace(';', ''));
+
+        const button = document.createElement('button');
+
+        button.innerText = "I'm from tagged template!";
+
+        const styles = cssProps.map((prop, i) => prop + args[i] + ';').join('');
+        button.setAttribute('style', styles);
+
+        return button;
+      }
+
+      createButton.addEventListener('click', function () {
+        const newButton = button`font-size: ${fontSizeInput.value}; color: ${colorInput.value};`;
+        document.body.appendChild(newButton);
+      });
+    </script>
+  </body>
+</html>
