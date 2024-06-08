@@ -1,56 +1,81 @@
-class Book {
-  constructor(title, author, year) {
-    this.title = title;
-    this.author = author;
-    this.year = year;
+(() => {
+  class Book {
+    constructor(title, author, year) {
+      this.title = title;
+      this.author = author;
+      this.year = year;
+    }
+
+    rate(rating) {
+      this.rating = rating;
+    }
   }
 
-  rate(rating) {
-    this.rating = rating;
-  }
-}
+  class LibraryCatalog {
+    constructor(books = []) {
+      this.books = books;
+    }
 
-class LibraryCatalog {
-  constructor(books = []) {
-    this.books = books;
-  }
-
-  [Symbol.iterator]() {
-    let currentIndex = 0;
-
-    const next = () => {
-      if (currentIndex < this.books.length) {
-        const book = this.books[currentIndex];
-        currentIndex++;
-        return { value: book, done: false };
-      } else {
-        return { done: true };
+    *[Symbol.iterator]() {
+      for (let i = 0; i < this.books.length; i++) {
+        const book = this.books[i];
+        yield book;
       }
-    };
-
-    return { next };
+      return;
+    }
   }
-}
 
-const a = new Book('Harry Potter 1', 'J.K. Rowling', 1997);
-const b = new Book('Harry Potter 2', 'J.K. Rowling', 1998);
-const c = new Book('Harry Potter 3', 'J.K. Rowling', 1999);
+  // class LibraryCatalog {
+  //   constructor(books = []) {
+  //     this.books = books;
+  //   }
 
-const libraryCatalog = new LibraryCatalog([a, b, c]);
+  //   [Symbol.iterator]() {
+  //     let currentIndex = 0;
+  //     const next = () => {
+  //       if (currentIndex < this.books.length) {
+  //         const book = this.books[currentIndex];
+  //         currentIndex++;
+  //         return { value: book, done: false };
+  //       } else {
+  //         return { done: true };
+  //       }
+  //     };
 
-// console.log(libraryCatalog);
+  //     return { next };
+  //   }
+  // }
 
-function rateBooks() {
-  for (const book of libraryCatalog) {
-    console.log(book);
-    const rating = prompt(
-      `Input rating for ${book.title}, written by ${book.author} in ${book.year}`
-    );
+  const a = new Book(
+    "Harry Potter and the Philosopher's Stone",
+    'J. K. Rowling',
+    1997
+  );
+  const b = new Book(
+    'Harry Potter and the Chamber of Secrets',
+    'J. K. Rowling',
+    1998
+  );
+  const c = new Book(
+    'Harry Potter and the Prisoner of Azkaban',
+    'J. K. Rowling',
+    1999
+  );
+  console.log(a, b, c);
+  const libraryCatalog = new LibraryCatalog([a, b, c]);
 
-    book.rate(rating);
+  console.log(libraryCatalog);
+
+  function rateBooks() {
+    for (const book of libraryCatalog) {
+      console.log(book);
+      const rating = prompt(
+        `Input rating for ${book.title}, written by ${book.author} in ${book.year}`
+      );
+      book.rate(rating);
+    }
   }
-}
 
-rateBooks();
-
-console.log(libraryCatalog.books);
+  rateBooks();
+  console.log(libraryCatalog.books);
+})();
